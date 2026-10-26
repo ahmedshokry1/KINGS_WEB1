@@ -225,6 +225,20 @@ export const Navbar: React.FC<NavbarProps> = ({
               <Lock className="w-4 h-4" />
             </button>
 
+            {/* Wallet Balance Pill like in screenshot */}
+            <button
+              onClick={onOpenCustomerPortal}
+              type="button"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#EAF5EC] hover:bg-[#DDF0E2] text-[#13583D] border border-[#CDE5D2] font-mono text-xs font-bold transition-all shadow-2xs active:scale-95"
+              title="المحفظة والرصيد"
+            >
+              <span className="w-4 h-4 rounded-full bg-[#13583D] text-white flex items-center justify-center text-[10px] font-black leading-none">
+                +
+              </span>
+              <span>{formatPrice(currentCustomer?.walletBalanceEGP || 0, currentCurrency)}</span>
+              <Wallet className="w-3.5 h-3.5 opacity-80" />
+            </button>
+
             {/* Shopping Cart Button */}
             <button
               onClick={onOpenCart}

@@ -29,6 +29,47 @@ export const ProductBrandIcon: React.FC<ProductBrandIconProps> = ({
 
   const key = `${slug} ${brand}`.toLowerCase();
 
+  // Microsoft (Office 365 / Copilot / Windows)
+  if (key.includes('microsoft') || key.includes('office') || key.includes('windows')) {
+    return (
+      <div className={`relative rounded-2xl flex items-center justify-center shadow-md bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700/50 ${sizeClasses} ${className}`}>
+        <div className="grid grid-cols-2 gap-1">
+          <div className="w-2.5 h-2.5 bg-[#F25022] rounded-xs shadow-xs"></div>
+          <div className="w-2.5 h-2.5 bg-[#7FBA00] rounded-xs shadow-xs"></div>
+          <div className="w-2.5 h-2.5 bg-[#00A4EF] rounded-xs shadow-xs"></div>
+          <div className="w-2.5 h-2.5 bg-[#FFB900] rounded-xs shadow-xs"></div>
+        </div>
+      </div>
+    );
+  }
+
+  // Lovable AI
+  if (key.includes('lovable')) {
+    return (
+      <div className={`relative rounded-2xl flex items-center justify-center shadow-md bg-gradient-to-br from-rose-500 via-red-500 to-pink-600 text-white ${sizeClasses} ${className}`}>
+        <span className="text-xl drop-shadow-sm select-none">❤️</span>
+      </div>
+    );
+  }
+
+  // Duolingo
+  if (key.includes('duolingo') || key.includes('duo')) {
+    return (
+      <div className={`relative rounded-2xl flex items-center justify-center shadow-md bg-gradient-to-br from-emerald-400 via-green-500 to-lime-600 text-white ${sizeClasses} ${className}`}>
+        <span className="text-xl drop-shadow-sm select-none">🦉</span>
+      </div>
+    );
+  }
+
+  // Zoom
+  if (key.includes('zoom')) {
+    return (
+      <div className={`relative rounded-2xl flex items-center justify-center shadow-md bg-gradient-to-br from-blue-500 via-sky-600 to-indigo-700 text-white ${sizeClasses} ${className}`}>
+        <span className="text-xl drop-shadow-sm select-none">📹</span>
+      </div>
+    );
+  }
+
   // 1. Google Gemini / Google AI
   if (key.includes('gemini') || key.includes('google-gemini') || key.includes('google ai')) {
     return (

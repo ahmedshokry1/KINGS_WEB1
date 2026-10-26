@@ -5,6 +5,8 @@ export type ProductCategory =
   | 'design'
   | 'video-audio'
   | 'research-study'
+  | 'productivity'
+  | 'learning'
   | 'bundles';
 
 export type DeliveryType = 

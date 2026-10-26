@@ -13,11 +13,18 @@ import {
   Search,
   SlidersHorizontal,
   ShieldCheck,
-  Zap
+  Zap,
+  LayoutGrid,
+  List,
+  Laptop,
+  GraduationCap
 } from 'lucide-react';
 import { Navbar } from './components/Navbar';
 import { HeroBanner } from './components/HeroBanner';
 import { ProductCard } from './components/ProductCard';
+import { BrandToolCard } from './components/BrandToolCard';
+import { BrandSubscriptionsModal } from './components/BrandSubscriptionsModal';
+import { BottomNavMobile } from './components/BottomNavMobile';
 import { ProductDetailModal } from './components/ProductDetailModal';
 import { CartDrawer } from './components/CartDrawer';
 import { CheckoutModal } from './components/CheckoutModal';
@@ -257,6 +264,15 @@ export default function App() {
 
   // Dedicated Product Detail Page navigation slug (null = catalog view)
   const [activeProductSlug, setActiveProductSlug] = useState<string | null>(null);
+
+  // Catalog View Mode: 'icons' (default as in screenshot) vs 'detailed'
+  const [catalogViewMode, setCatalogViewMode] = useState<'icons' | 'detailed'>('icons');
+
+  // Selected Brand Product for quick plans modal (e.g. Canva subscriptions modal)
+  const [selectedBrandProduct, setSelectedBrandProduct] = useState<SubscriptionProduct | null>(null);
+
+  // Bottom Mobile Nav tab
+  const [bottomNavTab, setBottomNavTab] = useState<'home' | 'wallet' | 'orders'>('home');
 
   // Customer Portal Modal
   const [isCustomerPortalOpen, setIsCustomerPortalOpen] = useState(false);
@@ -784,8 +800,10 @@ export default function App() {
   // Categories list
   const categories: { id: ProductCategory; label: string; icon: React.ComponentType<{ className?: string }> }[] = [
     { id: 'all', label: 'الكل', icon: Layers },
-    { id: 'ai-chat', label: 'شات وتوليد نصوص', icon: Bot },
     { id: 'design', label: 'تصميم وجرافيك', icon: Palette },
+    { id: 'ai-chat', label: 'شات وتوليد نصوص', icon: Bot },
+    { id: 'productivity', label: 'إنتاجية واجتماعات', icon: Laptop },
+    { id: 'learning', label: 'تعليم ولغات', icon: GraduationCap },
     { id: 'coding', label: 'برمجة وحوسبة', icon: Code },
     { id: 'video-audio', label: 'فيديو وصوتيات', icon: Video },
     { id: 'research-study', label: 'أبحاث ودراسة', icon: BookOpen },
@@ -893,7 +911,7 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-[#F8F6F2] text-[#242933] flex flex-col font-['Cairo',sans-serif]">
+    <div className="min-h-screen bg-[#F8F6F2] text-[#242933] flex flex-col font-['Cairo',sans-serif] pb-20 md:pb-0">
       
       {/* Admin Quick Control Banner for logged-in Administrator */}
       {isAdminLoggedIn && (
@@ -1051,8 +1069,38 @@ export default function App() {
                 </button>
               </div>
 
-              {/* Sort selector */}
-              <div className="flex items-center justify-between md:justify-end gap-2 text-xs pt-1 md:pt-0 border-t md:border-t-0 border-[#F0ECE4]">
+              {/* Sort selector & View Mode Toggle */}
+              <div className="flex items-center justify-between md:justify-end gap-2.5 text-xs pt-1 md:pt-0 border-t md:border-t-0 border-[#F0ECE4]">
+                {/* View Mode Toggle: Icons (Brand Cards like screenshot) vs Detailed */}
+                <div className="flex items-center bg-[#F8F6F2] p-0.5 rounded-full border border-[#E8E4DC]">
+                  <button
+                    type="button"
+                    onClick={() => setCatalogViewMode('icons')}
+                    className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-xs transition-all ${
+                      catalogViewMode === 'icons'
+                        ? 'bg-[#13583D] text-white shadow-sm font-bold'
+                        : 'text-[#5A6272] hover:text-[#242933]'
+                    }`}
+                    title="أيقونات الشركات (مثل الصورة)"
+                  >
+                    <LayoutGrid className="w-3.5 h-3.5" />
+                    <span>أيقونات</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setCatalogViewMode('detailed')}
+                    className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-xs transition-all ${
+                      catalogViewMode === 'detailed'
+                        ? 'bg-[#13583D] text-white shadow-sm font-bold'
+                        : 'text-[#5A6272] hover:text-[#242933]'
+                    }`}
+                    title="عرض الباقات المفصلة"
+                  >
+                    <List className="w-3.5 h-3.5" />
+                    <span>مفصل</span>
+                  </button>
+                </div>
+
                 <div className="flex items-center gap-1.5 text-[#5A6272]">
                   <ArrowUpDown className="w-3.5 h-3.5 text-[#8E97A7] shrink-0" />
                   <span className="text-xs">ترتيب:</span>
@@ -1091,7 +1139,20 @@ export default function App() {
                   عرض كافة الاشتراكات
                 </button>
               </div>
+            ) : catalogViewMode === 'icons' ? (
+              /* Brand / Tool Cards Grid (مطابقة لتصميم الصورة: شبكة من كروت التطبيقات بعرض 2 في الجوال وزر عرض المنتجات) */
+              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-5">
+                {filteredProducts.map((product) => (
+                  <BrandToolCard
+                    key={product.id}
+                    product={product}
+                    currency={currency}
+                    onViewProducts={(prod) => setSelectedBrandProduct(prod)}
+                  />
+                ))}
+              </div>
             ) : (
+              /* Detailed Subscription Cards Grid */
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                 {filteredProducts.map((product) => (
                   <ProductCard
@@ -1262,6 +1323,41 @@ export default function App() {
         onLoginSuccess={handleCustomerLoginSuccess}
         existingCustomers={customers}
         initialMode={authModalMode}
+      />
+
+      {/* Brand Subscriptions Modal (عرض جميع باقات واشتراكات الأداة المختارة مثل كانفا برو) */}
+      <BrandSubscriptionsModal
+        isOpen={!!selectedBrandProduct}
+        product={selectedBrandProduct}
+        currency={currency}
+        onClose={() => setSelectedBrandProduct(null)}
+        onAddToCart={handleAddToCart}
+        onBuyNow={handleBuyNow}
+        onViewFullDetails={(prod) => {
+          setSelectedBrandProduct(null);
+          setActiveProductSlug(prod.slug);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}
+      />
+
+      {/* Mobile Bottom Navigation Bar (الرئيسية، المحفظة، مشترياتي) */}
+      <BottomNavMobile
+        activeTab={bottomNavTab}
+        onGoHome={() => {
+          setBottomNavTab('home');
+          setActiveProductSlug(null);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}
+        onOpenWallet={() => {
+          setBottomNavTab('wallet');
+          setIsCustomerPortalOpen(true);
+        }}
+        onOpenOrders={() => {
+          setBottomNavTab('orders');
+          setIsCustomerPortalOpen(true);
+        }}
+        walletBalanceEGP={currentCustomer?.walletBalanceEGP || 0}
+        purchasesCount={subscriptions.filter((s) => s.status === 'active').length}
       />
 
     </div>
