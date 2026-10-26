@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+:root {
+  /* Soft Pastel & Modern Palette */
+  --bg-cream: #F8F6F2;
+  --bg-card: #FFFFFF;
+  --bg-card-subtle: #F4F1EA;
+  --text-charcoal: #242933;
+  --text-muted: #5E6676;
+  --text-soft: #858E9E;
+  
+  /* Pastel Accent Tints */
+  --pastel-blue-bg: #EEF4FC;
+  --pastel-blue-border: #D5E4F7;
+  --pastel-blue-text: #2C5282;
+
+  --pastel-honey-bg: #F7EED8;
+  --pastel-honey-border: #EFE0BD;
+  --pastel-honey-text: #634C1B;
+
+  --pastel-peach-bg: #F9EAE1;
+  --pastel-peach-border: #F2D5C3;
+  --pastel-peach-text: #8C4724;
+
+  --pastel-blue-cta: #3B72A8;
+  --pastel-blue-cta-hover: #305E8C;
+
+  --pastel-border: #E8E4DC;
+  --pastel-border-light: #F0ECE4;
+}
+
+body {
+  background-color: #F8F6F2;
+  color: #242933;
+  font-family: 'Cairo', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Subtle scrollbars for modern calm feel */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #F8F6F2;
+}
+::-webkit-scrollbar-thumb {
+  background: #D9D4C7;
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #C4BEAF;
+}
+
+::selection {
+  background-color: #DDE8F6;
+  color: #242933;
+}

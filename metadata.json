@@ -1,0 +1,8 @@
+{
+  "name": "Kings Store - AI Subscriptions",
+  "description": "متجر إلكتروني لبيع اشتراكات وحسابات أدوات الذكاء الاصطناعي والتصميم الأصلية بتفعيل فوري وضمان كامل المدة وأفضل الأسعار.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

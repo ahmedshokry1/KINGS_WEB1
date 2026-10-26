@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kings Store - AI Subscriptions</title>
+    <meta name="description" content="متجر إلكتروني لبيع اشتراكات وحسابات أدوات الذكاء الاصطناعي والتصميم الأصلية بتفعيل فوري وضمان كامل المدة وأفضل الأسعار." />
+    <meta property="og:title" content="Kings Store - AI Subscriptions" />
+    <meta property="og:description" content="متجر إلكتروني لبيع اشتراكات وحسابات أدوات الذكاء الاصطناعي والتصميم الأصلية بتفعيل فوري وضمان كامل المدة وأفضل الأسعار." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Defensive compatibility fix for browser extensions intercepting window.fetch -->
+    <script>
+      (function() {
+        try {
+          var _origFetch = window.fetch;
+          Object.defineProperty(window, 'fetch', {
+            get: function() { return _origFetch; },
+            set: function(val) { _origFetch = val; },
+            configurable: true,
+            enumerable: true
+          });
+        } catch (e) {}
+
+        window.addEventListener('error', function(e) {
+          if (e.filename && e.filename.indexOf('chrome-extension://') !== -1) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            return false;
+          }
+        }, true);
+      })();
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  </head>
+  <body class="bg-[#F8F6F2] text-[#242933] font-['Cairo',sans-serif] antialiased selection:bg-[#DDE8F6] selection:text-[#242933]">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
