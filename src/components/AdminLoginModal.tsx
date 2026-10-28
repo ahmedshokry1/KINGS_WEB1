@@ -7,8 +7,7 @@ import {
   Eye, 
   EyeOff, 
   KeyRound, 
-  AlertCircle,
-  Crown
+  AlertCircle
 } from 'lucide-react';
 
 interface AdminLoginModalProps {
@@ -52,7 +51,7 @@ export const AdminLoginModal: React.FC<AdminLoginModalProps> = ({
         onClose();
         setPassword('');
       } else {
-        setError('كلمة المرور غير صحيحة! كلمة المرور الافتراضية هي: kings2025');
+        setError('كلمة المرور غير صحيحة!');
       }
       setIsLoading(false);
     }, 400);
@@ -60,12 +59,12 @@ export const AdminLoginModal: React.FC<AdminLoginModalProps> = ({
 
   const loginCardContent = (
     <div 
-      className="relative w-full max-w-md bg-slate-900 border border-amber-500/40 rounded-3xl shadow-2xl overflow-hidden p-6 sm:p-8"
+      className="relative w-full max-w-md bg-white border border-[#E8E4DC] rounded-3xl shadow-2xl overflow-hidden p-6 sm:p-8 font-['Cairo',sans-serif] text-[#242933]"
       onClick={(e) => e.stopPropagation()}
     >
       <button
         onClick={onClose}
-        className="absolute top-5 left-5 p-2 rounded-full bg-slate-800 text-slate-400 hover:text-white transition-colors"
+        className="absolute top-5 left-5 p-2 rounded-full bg-[#F8F6F2] text-[#5A6272] hover:text-[#242933] transition-colors border border-[#E8E4DC]"
         title="الرجوع إلى المتجر"
       >
         <X className="w-4 h-4" />
@@ -73,30 +72,28 @@ export const AdminLoginModal: React.FC<AdminLoginModalProps> = ({
 
       {/* Icon & Title */}
       <div className="text-center mb-6">
-        <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-tr from-amber-600 to-yellow-400 p-[2px] shadow-lg shadow-amber-500/25">
-          <div className="w-full h-full bg-slate-950 rounded-2xl flex items-center justify-center">
-            <KeyRound className="w-8 h-8 text-amber-400" />
-          </div>
+        <div className="w-14 h-14 mx-auto mb-4 rounded-2xl bg-[#EAF2EC] text-[#13583D] border border-[#CDE3D4] flex items-center justify-center">
+          <KeyRound className="w-7 h-7" />
         </div>
 
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-bold mb-2">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#EAF2EC] border border-[#CDE3D4] text-[#13583D] text-xs font-bold mb-2">
           <ShieldCheck className="w-3.5 h-3.5" />
-          <span>منطقة محمية ومخصصة لإدارة المتجر 🔒</span>
+          <span>منطقة إدارة المتجر</span>
         </div>
 
-        <h3 className="text-xl font-black text-white">
-          تسجيل دخول موقع الإدارة
+        <h3 className="text-xl font-bold text-[#242933]">
+          تسجيل دخول لوحة الإدارة
         </h3>
-        <p className="text-xs text-slate-400 mt-1">
-          أدخل كلمة سر المشرف للوصول إلى منصة التحكم الشاملة وتعديل كل شيء في الموقع
+        <p className="text-xs text-[#5A6272] mt-1">
+          أدخل كلمة سر المشرف للوصول إلى لوحة التحكم
         </p>
       </div>
 
       {/* Form */}
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block text-xs font-semibold text-slate-300 mb-1.5">
-            كلمة مرور المسؤول (Admin Password)
+          <label className="block text-xs font-semibold text-[#242933] mb-1.5">
+            كلمة مرور المسؤول
           </label>
           <div className="relative">
             <input
@@ -104,13 +101,13 @@ export const AdminLoginModal: React.FC<AdminLoginModalProps> = ({
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="اكتب كلمة المرور..."
-              className="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 pl-11 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 transition-colors"
+              className="w-full bg-[#F8F6F2] border border-[#E8E4DC] rounded-xl px-4 py-3 pl-11 text-sm text-[#242933] placeholder-[#8E97A7] focus:outline-none focus:border-[#13583D] transition-colors"
               autoFocus
             />
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute left-3 top-3.5 text-slate-400 hover:text-white transition-colors"
+              className="absolute left-3 top-3.5 text-[#8E97A7] hover:text-[#242933] transition-colors"
             >
               {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
             </button>
@@ -118,7 +115,7 @@ export const AdminLoginModal: React.FC<AdminLoginModalProps> = ({
         </div>
 
         {error && (
-          <div className="flex items-center gap-2 p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs font-medium">
+          <div className="flex items-center gap-2 p-3 rounded-xl bg-[#FDEEEC] border border-[#F7C6C3] text-[#9C2B27] text-xs font-medium">
             <AlertCircle className="w-4 h-4 shrink-0" />
             <span>{error}</span>
           </div>
@@ -127,53 +124,36 @@ export const AdminLoginModal: React.FC<AdminLoginModalProps> = ({
         <button
           type="submit"
           disabled={isLoading}
-          className="w-full py-3 rounded-xl bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-500 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-bold text-sm shadow-lg shadow-amber-500/25 transition-all transform active:scale-[0.98] disabled:opacity-50 flex items-center justify-center gap-2"
+          className="w-full py-3 rounded-xl bg-[#13583D] hover:bg-[#0E442F] text-white font-bold text-sm shadow-xs transition-all active:scale-[0.98] disabled:opacity-50 flex items-center justify-center gap-2"
         >
           {isLoading ? (
-            <div className="w-5 h-5 border-2 border-slate-950 border-t-transparent rounded-full animate-spin" />
+            <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
           ) : (
             <>
               <Lock className="w-4 h-4" />
-              <span>دخول منصة الإدارة</span>
+              <span>دخول لوحة الإدارة</span>
             </>
           )}
         </button>
-
-        {/* Quick Demo Helper */}
-        <div className="pt-2 text-center">
-          <button
-            type="button"
-            onClick={() => {
-              setPassword('kings2025');
-              setError('');
-            }}
-            className="text-[11px] text-amber-400/80 hover:text-amber-300 underline underline-offset-4"
-          >
-            استخدام كلمة المرور الافتراضية للتجربة (kings2025)
-          </button>
-        </div>
       </form>
     </div>
   );
 
   if (isStandalone) {
     return (
-      <div className="min-h-screen w-full bg-[#070a12] text-slate-100 flex flex-col justify-center items-center p-4 relative overflow-hidden font-sans">
-        <div className="absolute top-1/4 -right-20 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
-        <div className="absolute bottom-1/4 -left-20 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
-
+      <div className="min-h-screen w-full bg-[#F8F6F2] text-[#242933] flex flex-col justify-center items-center p-4 relative font-['Cairo',sans-serif]">
         <div className="w-full max-w-md flex items-center justify-between mb-4 z-10">
           <button
             type="button"
             onClick={onClose}
-            className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-white transition-colors bg-slate-900/60 px-3 py-1.5 rounded-xl border border-slate-800"
+            className="flex items-center gap-1.5 text-xs text-[#5A6272] hover:text-[#242933] transition-colors bg-white px-3 py-1.5 rounded-xl border border-[#E8E4DC]"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>الرجوع إلى المتجر الرئيسي</span>
           </button>
 
-          <span className="text-[11px] font-mono text-amber-400 bg-amber-500/10 px-2.5 py-1 rounded-xl border border-amber-500/30">
-            King's Store Portal
+          <span className="text-[11px] font-mono text-[#13583D] bg-[#EAF2EC] px-2.5 py-1 rounded-xl border border-[#CDE3D4]">
+            King's Store Admin
           </span>
         </div>
 
@@ -185,9 +165,8 @@ export const AdminLoginModal: React.FC<AdminLoginModalProps> = ({
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
       {loginCardContent}
     </div>
   );
 };
-

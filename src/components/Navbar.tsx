@@ -11,8 +11,7 @@ import {
   ShieldCheck,
   User,
   LogOut,
-  Wallet,
-  Database
+  Wallet
 } from 'lucide-react';
 import { CurrencyCode, StoreSiteSettings, CustomerUser } from '../types/store';
 import { CURRENCIES, formatPrice } from '../utils/currency';
@@ -34,7 +33,7 @@ interface NavbarProps {
   selectedCategory: string;
   siteSettings?: StoreSiteSettings;
   currentCustomer?: CustomerUser | null;
-  onOpenAuth?: (mode?: 'login' | 'register' | 'database') => void;
+  onOpenAuth?: (mode?: 'login' | 'register') => void;
   onCustomerLogout?: () => void;
 }
 

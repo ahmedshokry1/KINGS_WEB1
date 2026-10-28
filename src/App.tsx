@@ -38,7 +38,6 @@ import { TestimonialsSection } from './components/TestimonialsSection';
 import { FaqSection } from './components/FaqSection';
 import { Footer } from './components/Footer';
 import { FloatingWhatsApp } from './components/FloatingWhatsApp';
-import { RecentSalesToast } from './components/RecentSalesToast';
 import { CustomerPortalModal } from './components/CustomerPortalModal';
 import { ProductDetailPage } from './components/ProductDetailPage';
 import { AuthModal } from './components/AuthModal';
@@ -90,7 +89,10 @@ export default function App() {
     const saved = localStorage.getItem('kings_store_orders');
     if (saved) {
       try {
-        return JSON.parse(saved);
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) {
+          return parsed.filter((o: any) => !['ord-1', 'ord-2', 'ord-3'].includes(o.id));
+        }
       } catch (e) {
         // fallback
       }
@@ -102,7 +104,10 @@ export default function App() {
     const saved = localStorage.getItem('kings_store_subs');
     if (saved) {
       try {
-        return JSON.parse(saved);
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) {
+          return parsed.filter((s: any) => !['sub-1', 'sub-2', 'sub-3', 'sub-4', 'sub-5', 'sub-6'].includes(s.id));
+        }
       } catch (e) {
         // fallback
       }
@@ -126,7 +131,10 @@ export default function App() {
     const saved = localStorage.getItem('kings_store_customers');
     if (saved) {
       try {
-        return JSON.parse(saved);
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) {
+          return parsed.filter((c: any) => !['CUST-8821', 'CUST-7419', 'CUST-6204', 'CUST-9903', 'CUST-4112'].includes(c.id));
+        }
       } catch (e) {
         // fallback
       }
@@ -193,7 +201,7 @@ export default function App() {
   });
 
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
-  const [authModalMode, setAuthModalMode] = useState<'login' | 'register' | 'database'>('login');
+  const [authModalMode, setAuthModalMode] = useState<'login' | 'register'>('login');
 
   // Sync hash changes for navigation
   useEffect(() => {
@@ -207,10 +215,6 @@ export default function App() {
         setViewMode('store');
       } else if (hash === '#register' || hash === '#signup') {
         setAuthModalMode('register');
-        setIsAuthModalOpen(true);
-        setViewMode('store');
-      } else if (hash === '#database' || hash === '#supabase') {
-        setAuthModalMode('database');
         setIsAuthModalOpen(true);
         setViewMode('store');
       } else if (hash === '' || hash === '#store') {
@@ -1176,7 +1180,7 @@ export default function App() {
           <TrustFeaturesSection />
 
           {/* Customer Reviews Section */}
-          {siteSettings.showReviewsSection !== false && (
+          {siteSettings.showReviewsSection !== false && MOCK_REVIEWS.length > 0 && (
             <TestimonialsSection reviews={MOCK_REVIEWS} />
           )}
 
@@ -1201,7 +1205,6 @@ export default function App() {
         presetMessage={siteSettings.whatsappMessagePreset}
         isEnabled={siteSettings.enableWhatsAppFloating}
       />
-      <RecentSalesToast />
 
       {/* MODALS */}
 
@@ -1234,7 +1237,7 @@ export default function App() {
           setActiveProductSlug(slug);
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }}
-        defaultCustomerEmail={currentCustomer?.email || 'ahmedcraft153@gmail.com'}
+        defaultCustomerEmail={currentCustomer?.email || ''}
       />
 
       {/* Cart Drawer */}
@@ -1313,9 +1316,7 @@ export default function App() {
           if (
             window.location.hash === '#login' ||
             window.location.hash === '#register' ||
-            window.location.hash === '#signup' ||
-            window.location.hash === '#database' ||
-            window.location.hash === '#supabase'
+            window.location.hash === '#signup'
           ) {
             window.location.hash = '';
           }
