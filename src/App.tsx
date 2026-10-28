@@ -1013,13 +1013,13 @@ export default function App() {
                     key={cat.id}
                     onClick={() => setSelectedCategory(cat.id)}
                     type="button"
-                    className={`flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm font-semibold whitespace-nowrap transition-all border shrink-0 snap-start active:scale-95 ${
+                    className={`flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm font-semibold whitespace-nowrap transition-all duration-200 border shrink-0 snap-start active:scale-95 ${
                       isSelected
-                        ? 'bg-[#2C3442] text-white border-[#2C3442] shadow-xs'
-                        : 'bg-white hover:bg-[#F2EFE8] border-[#E8E4DC] text-[#5A6272]'
+                        ? 'bg-[#13583D] text-white border-[#13583D] shadow-xs font-bold'
+                        : 'bg-white hover:bg-[#F2EFE8] border-[#E8E4DC] text-[#5A6272] hover:text-[#242933]'
                     }`}
                   >
-                    <Icon className={`w-3.5 h-3.5 shrink-0 ${isSelected ? 'text-[#DDE9F8]' : 'text-[#8E97A7]'}`} />
+                    <Icon className={`w-3.5 h-3.5 shrink-0 ${isSelected ? 'text-white' : 'text-[#8E97A7]'}`} />
                     <span>{cat.label}</span>
                   </button>
                 );
@@ -1145,7 +1145,7 @@ export default function App() {
               </div>
             ) : catalogViewMode === 'icons' ? (
               /* Brand / Tool Cards Grid (مطابقة لتصميم الصورة: شبكة من كروت التطبيقات بعرض 2 في الجوال وزر عرض المنتجات) */
-              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-5">
+              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-5 animate-in fade-in slide-in-from-bottom-2 duration-300">
                 {filteredProducts.map((product) => (
                   <BrandToolCard
                     key={product.id}
@@ -1157,7 +1157,7 @@ export default function App() {
               </div>
             ) : (
               /* Detailed Subscription Cards Grid */
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 animate-in fade-in slide-in-from-bottom-2 duration-300">
                 {filteredProducts.map((product) => (
                   <ProductCard
                     key={product.id}

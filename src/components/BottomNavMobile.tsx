@@ -27,9 +27,9 @@ export const BottomNavMobile: React.FC<BottomNavMobileProps> = ({
       <button
         onClick={onGoHome}
         type="button"
-        className={`flex flex-col items-center gap-1 py-1 px-4 rounded-2xl transition-all ${
+        className={`flex flex-col items-center gap-1 py-1.5 px-4 rounded-2xl transition-all duration-200 active:scale-90 ${
           activeTab === 'home'
-            ? 'bg-[#EAF2EC] text-[#13583D] font-bold'
+            ? 'bg-[#EAF2EC] text-[#13583D] font-bold shadow-2xs'
             : 'text-slate-500 hover:text-slate-800 font-medium'
         }`}
       >
@@ -41,16 +41,16 @@ export const BottomNavMobile: React.FC<BottomNavMobileProps> = ({
       <button
         onClick={onOpenWallet}
         type="button"
-        className={`flex flex-col items-center gap-1 py-1 px-4 rounded-2xl transition-all relative ${
+        className={`flex flex-col items-center gap-1 py-1.5 px-4 rounded-2xl transition-all duration-200 active:scale-90 relative ${
           activeTab === 'wallet'
-            ? 'bg-[#EAF2EC] text-[#13583D] font-bold'
+            ? 'bg-[#EAF2EC] text-[#13583D] font-bold shadow-2xs'
             : 'text-slate-500 hover:text-slate-800 font-medium'
         }`}
       >
         <Wallet className="w-5 h-5" />
         <span className="text-[11px]">المحفظة</span>
         {walletBalanceEGP > 0 && (
-          <span className="absolute top-1 right-3 w-2 h-2 rounded-full bg-emerald-500"></span>
+          <span className="absolute top-1 right-3 w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
         )}
       </button>
 
@@ -58,16 +58,16 @@ export const BottomNavMobile: React.FC<BottomNavMobileProps> = ({
       <button
         onClick={onOpenOrders}
         type="button"
-        className={`flex flex-col items-center gap-1 py-1 px-4 rounded-2xl transition-all relative ${
+        className={`flex flex-col items-center gap-1 py-1.5 px-4 rounded-2xl transition-all duration-200 active:scale-90 relative ${
           activeTab === 'orders'
-            ? 'bg-[#EAF2EC] text-[#13583D] font-bold'
+            ? 'bg-[#EAF2EC] text-[#13583D] font-bold shadow-2xs'
             : 'text-slate-500 hover:text-slate-800 font-medium'
         }`}
       >
         <ShoppingBag className="w-5 h-5" />
         <span className="text-[11px]">مشترياتي</span>
         {purchasesCount > 0 && (
-          <span className="absolute top-0 right-2 w-4 h-4 rounded-full bg-[#13583D] text-white text-[9px] font-black flex items-center justify-center">
+          <span className="absolute top-0 right-2 w-4 h-4 rounded-full bg-[#13583D] text-white text-[9px] font-black flex items-center justify-center animate-bounce">
             {purchasesCount}
           </span>
         )}

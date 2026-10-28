@@ -228,10 +228,10 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               onClick={onOpenCustomerPortal}
               type="button"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#EAF5EC] hover:bg-[#DDF0E2] text-[#13583D] border border-[#CDE5D2] font-mono text-xs font-bold transition-all shadow-2xs active:scale-95"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#EAF5EC] hover:bg-[#DDF0E2] text-[#13583D] border border-[#CDE5D2] font-mono text-xs font-bold transition-all duration-200 shadow-2xs hover:shadow-xs hover:scale-105 active:scale-95 group"
               title="المحفظة والرصيد"
             >
-              <span className="w-4 h-4 rounded-full bg-[#13583D] text-white flex items-center justify-center text-[10px] font-black leading-none">
+              <span className="w-4 h-4 rounded-full bg-[#13583D] text-white flex items-center justify-center text-[10px] font-black leading-none group-hover:rotate-90 transition-transform">
                 +
               </span>
               <span>{formatPrice(currentCustomer?.walletBalanceEGP || 0, currentCurrency)}</span>
@@ -242,12 +242,12 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               onClick={onOpenCart}
               type="button"
-              className="flex items-center gap-2 px-4 py-2 rounded-full bg-[#3B72A8] hover:bg-[#305E8C] text-white font-bold text-xs sm:text-sm shadow-xs transition-all active:scale-98 select-none"
+              className="flex items-center gap-2 px-4 py-2 rounded-full bg-[#13583D] hover:bg-[#0E442F] text-white font-bold text-xs sm:text-sm shadow-xs hover:shadow-md transition-all duration-200 hover:scale-105 active:scale-95 select-none"
             >
               <ShoppingCart className="w-4 h-4" />
               <span className="hidden sm:inline">السلة</span>
               {cartCount > 0 && (
-                <span className="bg-white text-[#3B72A8] rounded-full w-5 h-5 flex items-center justify-center text-xs font-black">
+                <span className="bg-white text-[#13583D] rounded-full w-5 h-5 flex items-center justify-center text-xs font-black animate-pulse">
                   {cartCount}
                 </span>
               )}
